@@ -1,0 +1,1 @@
+var travelApp = angular.module('travelApp', ['ngRoute']);

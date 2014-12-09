@@ -1,0 +1,94 @@
+* {
+	margin: 0px; 
+	padding: 0px;
+	font-size: 0px;
+	font-family: Andale Mono, Verdana, Impact;
+}
+
+#wrapper {
+	height: auto; width: 100%;
+}
+
+#nav {
+	height: 10%; width: 100%;
+	position: fixed; top: 0px;
+	z-index: 1200;
+}
+
+div.left {
+	width: 80.5%;
+	display: inline-block;
+	margin-left: 0.5%;
+}
+
+div .right {
+	width: 18.5%;
+	display: inline-block;
+	text-align: right;
+	margin-right: 0.5%;
+}
+
+.bar {
+	height: 3px; width: 40px;
+	margin: 5px 0px;
+	background-color: white;
+	border: 1px solid white;
+	border-radius: 5px;
+}
+
+#a0 {
+	height: 100%; width: 100%;
+	min-height: 800px;
+	background-size: cover;
+	background-attachment: fixed;
+	z-index: -100;
+}
+
+#content {
+	background-color: #181818;
+	height: auto; width: 100%;
+}
+
+img {
+	display: inline-block;
+	background-size: cover;
+	position: relative;
+	z-index: 500;
+	border-radius: 10px;
+	margin: 0.25%;
+}
+
+img:hover {
+	/*-webkit-filter: saturate(4);*/
+	-webkit-filter: contrast(2) grayscale(1);
+}
+
+h1 {
+	font-size: 50px; font-weight: 800;
+	font-style: italic;
+	text-decoration: underline;
+	color: white;
+	margin: 0px;
+	z-index: 1;
+}
+
+#myvid {
+	height: auto; width: 100%;
+	background-size: cover;
+	z-index: -20;
+}
+
+@media (min-width: 1000px) {
+    img { height: auto; width: 24.5%; }
+}
+
+@media (min-width: 500px) and (max-width: 1000px) {
+    img { height: auto; width: 32.75%; }
+    div .right { width: 13.5%; margin-right: 5.5%; }
+}
+
+@media (max-width: 500px) {
+    img { height: auto; width: 49.5%; }
+    div .right { width: 5.5%; margin-right: 13.5%; }
+}
+
