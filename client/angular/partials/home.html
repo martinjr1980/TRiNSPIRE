@@ -1,19 +1,42 @@
 <div ng-controller='MainController'>
-	<div id='nav' class='row'>
+	<div id='header' class='row'>
 		<div class='left'>
-			<h1>TRiNSPIRE</h1>
+			<a href='#'><h1>TRiNSPIRE</h1></a>
 		</div>
 		<div class='right'>
-			<a href='' class='right'>
+			<a href='' ng-click='toggleNav()' class='right'>
 				<p class='bar'></p>
 				<p class='bar'></p>
 				<p class='bar'></p>
 			</a>
 		</div>
 	</div>
-	<div>
-		<div id='a0'></div>
-	</div>
-	<div id='content'>
+	<div id='canvas'>
+		<div id='nav-bar'>
+			<ul>
+				<li id='login'>
+					<a ng-click='expand()' class='link' href=''>Login</a>
+						<div id='form' class='hide'>
+						<p><input type='text' ng-model='new_user.name'></p>
+						<p><button ng-click='login()' class='orange'>Enter</button></p>
+					</div>
+				</li>
+				<li><a class='link' href=''>All Photos</a></li>
+				<li><a class='link' href=''></a></li>
+				<li><a class='link' href=''></a></li>
+				<li><a class='link' href=''></a></li>
+				<li><a class='link' href=''></a></li>
+				<li><a class='link' href=''></a></li>
+				<li><a class='link' href=''></a></li>
+				<li><a class='link' href=''></a></li>
+				<li><a class='link' href=''></a></li>
+				<li><a class='link' href=''></a></li>
+				<li><a class='link' href=''></a></li>
+			</ul>
+		</div>
+		<div id='a0'>
+		</div>
+		<div id='content'>
+		</div>
 	</div>
 </div>

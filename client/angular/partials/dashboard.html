@@ -1,0 +1,49 @@
+<div ng-controller='MainController'>
+	<div id='header' class='row'>
+		<div class='left'>
+			<a href='#/dashboard'><h1>TRiNSPIRE</h1></a>
+		</div>
+		<div class='right'>
+			<a href='' ng-click='toggleNav()' class='right'>
+				<p class='bar'></p>
+				<p class='bar'></p>
+				<p class='bar'></p>
+			</a>
+		</div>
+	</div>
+	<div id='canvas'>
+		<div id='nav-bar'>
+			<ul>
+				<li>
+					<p class='name'>Hi {{ current_user.name }}!</p>
+				</li>
+				<li><a class='link' href=''>All Photos</a></li>
+				<li><a class='link' href=''>My Photos</a></li>
+				<li id='add-photo'>
+					<a ng-click='expand2()' class='link' href=''>Add Photo</a>
+					<p class='success'>{{ message.success }}</p>
+					<div id='form' class='hide'>
+						<p><input type='text' class='long' ng-model='new_photo.title' placeholder='Title'></p>
+						<p><input type='text' class='long' ng-model='new_photo.url' placeholder='URL'></p>
+						<p><input type='text' class='long' ng-model='new_photo.city' placeholder='City'></p>
+						<p><input type='text' class='long' ng-model='new_photo.country' placeholder='Country'></p>
+						<p><textarea class='long' ng-model='new_photo.description' placeholder='Description'></textarea></p>
+						<p><button ng-click='addPhoto(current_user._id)' class='green'>Enter</button></p>
+					</div>
+				</li>
+				<li><a ng-click='logout()' class='link' href='#'>Logout</a></li>
+				<li><a class='link' href=''></a></li>
+				<li><a class='link' href=''></a></li>
+				<li><a class='link' href=''></a></li>
+				<li><a class='link' href=''></a></li>
+				<li><a class='link' href=''></a></li>
+				<li><a class='link' href=''></a></li>
+				<li><a class='link' href=''></a></li>
+			</ul>
+		</div>
+		<div id='a0'>
+		</div>
+		<div id='content'>
+		</div>
+	</div>
+</div>

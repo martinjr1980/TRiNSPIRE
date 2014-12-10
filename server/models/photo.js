@@ -7,6 +7,7 @@ var Schema = mongoose.Schema;
 var PhotoSchema = new mongoose.Schema ({
 	_user: {type: Schema.ObjectId, ref: 'User'},
 	title: String,
+	url: String,
 	city: String,
 	country: String,
 	description: String,

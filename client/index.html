@@ -3,12 +3,13 @@
 <head>
 	<meta charset='utf-8'>
 	<title>TRiNSPIRE</title>
-	<script type="text/javascript" src="angular/public/scripts/angular.min.js"></script>
+	<script type="text/javascript" src='angular/public/scripts/angular.min.js'></script>
 	<script type="text/javascript" src='angular/public/scripts/angular-route.min.js'></script>
+	<script type="text/javascript" src='angular/public/scripts/ui-bootstrap-tpls-0.12.0.min.js'></script>
 	<script type="text/javascript" src='angular/app.js'></script>
 	<script type="text/javascript" src='angular/controllers/main-controller.js'></script>
-	<!-- // <script type="text/javascript" src='angular/factories/user-factory.js'></script> -->
-	<!-- // <script type="text/javascript" src='angular/factories/photo-factory.js'></script> -->
+	<script type="text/javascript" src='angular/factories/user-factory.js'></script>
+	<script type="text/javascript" src='angular/factories/photo-factory.js'></script>
 	<link rel="stylesheet" type="text/css" href="angular/public/stylesheets/style.css">
 </head>
 <body>
@@ -20,6 +21,10 @@
 						.when('/',
 						{
 							templateUrl: 'angular/partials/home.html'
+						})
+						.when('/dashboard',
+						{
+							templateUrl: 'angular/partials/dashboard.html'
 						})
 				});
 			</script>
