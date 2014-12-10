@@ -22,7 +22,13 @@
 					</div>
 				</li>
 				<li><a class='link' href=''>All Photos</a></li>
-				<li><a class='link' href=''></a></li>
+				<li>
+					<a class='marg-left' href='' ng-click='toggleNav()'>
+						<p class='bar'></p>
+						<p class='bar'></p>
+						<p class='bar'></p>
+					</a>
+				</li>
 				<li><a class='link' href=''></a></li>
 				<li><a class='link' href=''></a></li>
 				<li><a class='link' href=''></a></li>
@@ -37,6 +43,9 @@
 		<div id='a0'>
 		</div>
 		<div id='content'>
+			<div class='block' ng-repeat="photo in all_photos | filter: filter_name | orderBy: 'created_at'">
+				<img class='thumb' src="{{ photo.url }}">
+			</div>
 		</div>
 	</div>
 </div>

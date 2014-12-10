@@ -24,6 +24,7 @@ module.exports = (function() {
 		create: function (req, res) {
 			User.findOne({ _id: req.body._user }, function (err, user) {
 				var photo = new Photo(req.body);
+				photo.created_at = new Date();
 				user.photos.push(photo._id);
 				photo.save(function (err) {
 					user.save(function (err) {

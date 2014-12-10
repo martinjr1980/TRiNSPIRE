@@ -8,6 +8,7 @@ var PhotoSchema = new mongoose.Schema ({
 	_user: {type: Schema.ObjectId, ref: 'User'},
 	title: String,
 	url: String,
+	url_large: String,
 	city: String,
 	country: String,
 	description: String,
@@ -15,7 +16,7 @@ var PhotoSchema = new mongoose.Schema ({
 	dislikes: { type: Number, default: 0 },
 	comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
 	tags: [{ type: Schema.Types.ObjectId, ref: 'Tag' }],
-	created_at: { type: Date, default: new Date }
+	created_at: Date
 });
 
 module.exports = mongoose.model('Photo', PhotoSchema);

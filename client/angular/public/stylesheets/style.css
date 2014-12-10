@@ -28,7 +28,7 @@
 	height: 100%; width: 300px;
 	position: absolute;
 	top: 0; left: -300px;
-	background-color: gray;
+	background-color: #404040;
 	padding-top: 60px;
 }
 
@@ -55,9 +55,17 @@ div.right {
 .bar {
 	height: 3px; width: 40px;
 	margin: 5px 0px;
-	background-color: white;
-	border: 1px solid white;
+	background-color: #19FFA3;
+	border: 1px solid #19FFA3;
 	border-radius: 5px;
+}
+
+.half {
+	width: 25px;
+}
+
+.quarter {
+	width: 10px;
 }
 
 #a0 {
@@ -69,33 +77,45 @@ div.right {
 	z-index: -100;
 }
 
-#content {
+#content, #my-content {
 	background-color: #181818;
 	height: auto; width: 100%;
 }
 
-img {
+.block {
 	display: inline-block;
+	margin: 0.25%;
+}
+
+img.thumb {
+	height: 100%; width: 100%;
 	background-size: cover;
 	position: relative;
 	z-index: 500;
 	border-radius: 10px;
-	margin: 0.25%;
 }
 
-img:hover {
+img.full-size {
+	height: 100%; width: 100%;
+	min-height: 800px;
+/*	background-size: cover;
+	background-attachment: fixed;*/
+	z-index: 500;
+}
+
+img.thumb:hover {
 	/*-webkit-filter: saturate(4);*/
 	-webkit-filter: contrast(2) grayscale(1);
 }
 
 li:hover {
-	background-color: #999999;
+	background-color: #666666;
 }
 
 h1 {
 	font-size: 50px; font-weight: 800;
 	font-style: italic;
-	color: white;
+	color: #19FFA3;
 	z-index: 1;
 }
 
@@ -131,6 +151,10 @@ a.link, p {
 	margin-left: 15px;
 }
 
+a.marg-left p {
+	margin-left: 15px;
+}
+
 a {
 	text-decoration: none;
 }
@@ -154,6 +178,9 @@ input[type='text'] {
 	margin-top: 10px;
 	color: black;
 	font-size: 15px;
+	border: 1px solid #666666;
+	border-radius: 3px;
+	padding-left: 5px;
 }
 
 input[type='text'].long, textarea.long {
@@ -165,6 +192,9 @@ textarea {
 	color: black;
 	font-size: 15px;
 	height: 100px;
+	border: 1px solid #666666;
+	border-radius: 3px;
+	padding-left: 5px;
 }
 
 button {
@@ -181,12 +211,12 @@ button.orange {
 }
 
 button.green {
-	background-color: green;
-	border: 1.5px solid #006600;
+	background-color: #00CC7A;
+	border: 1.5px solid #00995C;
 }
 
 .success {
-	color: green;
+	color: #00995C;
 	font-size: 20px;
 }
 
@@ -201,13 +231,14 @@ button.right {
 }
 
 @media (min-width: 1000px) {
-    img { height: auto; width: 24.5%; }
+    div.block { height: auto; width: 24.5%; }
+
 }
 
 @media (min-width: 500px) and (max-width: 1000px) {
-    img { height: auto; width: 32.75%; }
+    div.block { height: auto; width: 32.75%; }
 }
 
 @media (max-width: 500px) {
-    img { height: auto; width: 49.5%; }
+    div.block { height: auto; width: 49.5%; }
 }

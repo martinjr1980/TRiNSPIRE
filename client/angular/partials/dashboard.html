@@ -18,13 +18,13 @@
 					<p class='name'>Hi {{ current_user.name }}!</p>
 				</li>
 				<li><a class='link' href=''>All Photos</a></li>
-				<li><a class='link' href=''>My Photos</a></li>
+				<li><a ng-click='showUser(current_user._id)' class='link' href=''>My Photos</a></li>
 				<li id='add-photo'>
 					<a ng-click='expand2()' class='link' href=''>Add Photo</a>
 					<p class='success'>{{ message.success }}</p>
 					<div id='form' class='hide'>
 						<p><input type='text' class='long' ng-model='new_photo.title' placeholder='Title'></p>
-						<p><input type='text' class='long' ng-model='new_photo.url' placeholder='URL'></p>
+						<p><input type='text' class='long' ng-model='new_photo.url' placeholder='File Name'></p>
 						<p><input type='text' class='long' ng-model='new_photo.city' placeholder='City'></p>
 						<p><input type='text' class='long' ng-model='new_photo.country' placeholder='Country'></p>
 						<p><textarea class='long' ng-model='new_photo.description' placeholder='Description'></textarea></p>
@@ -32,7 +32,13 @@
 					</div>
 				</li>
 				<li><a ng-click='logout()' class='link' href='#'>Logout</a></li>
-				<li><a class='link' href=''></a></li>
+				<li>
+					<a class='marg-left' href='' ng-click='toggleNav()'>
+						<p class='bar'></p>
+						<p class='bar'></p>
+						<p class='bar'></p>
+					</a>
+				</li>
 				<li><a class='link' href=''></a></li>
 				<li><a class='link' href=''></a></li>
 				<li><a class='link' href=''></a></li>
@@ -43,7 +49,10 @@
 		</div>
 		<div id='a0'>
 		</div>
-		<div id='content'>
+		<div id='my-content'>
+			<div class='block' ng-repeat="photo in my_photos | filter: filter_name | orderBy: 'created_at'">
+				<img class='thumb' src="{{ photo.url }}">
+			</div>
 		</div>
 	</div>
 </div>

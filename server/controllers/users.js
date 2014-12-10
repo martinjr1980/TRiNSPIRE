@@ -13,6 +13,7 @@ module.exports = (function() {
 			User.findOne({ name: req.body.name }, function (err, user) {
 				if (user === null) {
 					user = new User(req.body);
+					user.created_at = new Date();
 					user.save(function (err) {
 						res.json(user);
 					})

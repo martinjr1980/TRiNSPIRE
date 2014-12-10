@@ -1,24 +1,50 @@
 travelApp.controller('MainController', function ($scope, $location, UserFactory, PhotoFactory) {
-	var carousel = [];
-	function addBackgroundImages() {
-		for (var i=1; i<=5; i++) {
-			var src = "./angular/public/images/large/" + i + ".jpg";
-			carousel.push({ image: src });
-		}
-	}
-	addBackgroundImages();
-	$scope.carousel = carousel;
-	$scope.number = 1;
-	document.getElementById('a0').style.backgroundImage="url(" + $scope.carousel[3].image + ")";
 
-	function showImages() {
-		var html='';
-		for (var i=1; i<=100; i++) {
-			html += "<img src='./angular/public/images/" + i + ".jpg'>";
-		}
-		document.getElementById('content').innerHTML = html;
+	function mainPhoto() {
+		var length = $scope.all_photos.length;
+		var main_photo = $scope.all_photos[length-1].url_large;
+		document.getElementById('a0').style.backgroundImage="url(" + main_photo + ")";
 	}
-	showImages();
+
+	PhotoFactory.allPhotos(function (output) {
+		$scope.all_photos = output;
+		mainPhoto();
+	})
+
+	if (localStorage.session !== JSON.stringify({}) && localStorage.session) {
+		if (JSON.parse(localStorage.session).loggedIn === true) {
+			$scope.current_user = JSON.parse(localStorage.session).user;
+
+			var id = $scope.current_user._id;
+			PhotoFactory.myPhotos(id, function (output) {
+				$scope.my_photos = output;
+			})
+		}
+	}
+
+	$scope.login = function() {
+		UserFactory.login($scope.new_user, function (output) {
+			localStorage.session = JSON.stringify(output);
+			$location.path('/dashboard');
+		})
+	}
+
+	$scope.logout = function() {
+		UserFactory.logout(function() {
+			localStorage.session = JSON.stringify({});
+			$location.path('/');
+		})
+	}
+
+	$scope.addPhoto = function (id) {
+		$scope.new_photo._user = id;
+		$scope.new_photo.url_large = "angular/public/images/large/" + $scope.new_photo.url;
+		$scope.new_photo.url = "angular/public/images/" + $scope.new_photo.url;
+		PhotoFactory.addPhoto($scope.new_photo, function (output) {
+			$scope.new_photo = {};
+			$scope.message = output;
+		});
+	}
 
 	$scope.toggleNav = function() {
 		var wrapper = document.getElementById('wrapper');
@@ -52,36 +78,6 @@ travelApp.controller('MainController', function ($scope, $location, UserFactory,
 			add.className = 'tall2';	
 			document.getElementById('form').className = '';
 		}
-	}
-
-	if (localStorage.session !== JSON.stringify({}) && localStorage.session) {
-		if (JSON.parse(localStorage.session).loggedIn === true) {
-			$scope.current_user = JSON.parse(localStorage.session).user;
-
-		}
-	}
-
-	$scope.login = function() {
-		UserFactory.login($scope.new_user, function (output) {
-			localStorage.session = JSON.stringify(output);
-			$location.path('/dashboard');
-		})
-	}
-
-	$scope.logout = function() {
-		UserFactory.logout(function() {
-			localStorage.session = JSON.stringify({});
-			$location.path('/');
-		})
-	}
-
-	$scope.addPhoto = function(id) {
-		$scope.new_photo._user = id;
-		PhotoFactory.addPhoto($scope.new_photo, function (output) {
-			$scope.new_photo = {};
-			$scope.message = output;
-		});
-		
 	}
 
 })

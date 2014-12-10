@@ -6,7 +6,7 @@ var UserSchema = new mongoose.Schema ({
 	name: String,
 	admin: { type: Boolean, default: false },
 	photos: [{ type: Schema.Types.ObjectId, ref: 'Photo' }],
-	created_at: { type: Date, default: new Date }
+	created_at: Date
 });
 
 module.exports = mongoose.model('User', UserSchema);
