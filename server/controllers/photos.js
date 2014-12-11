@@ -47,9 +47,36 @@ module.exports = (function() {
 		},
 
 		like: function (req, res) {
-			Photo.update({ _id: req.body._id }, { $inc: { likes: 1 }}, function (err, results) {
-				res.end()
-			})
+			if (req.body.like_status === true) {
+				User.findOne({ _id: req.body.user_id }, function (err, user) {
+					user.like_photos.push(req.body._id);
+					Photo.update({ _id: req.body._id }, { $inc: { likes: 1 }}, function (err, results) {
+						user.save(function (err) {
+							res.end()
+						})
+					})
+				})	
+			}
+			else {
+				User.findOne({ _id: req.body.user_id }, function (err, user) {
+					console.log(req.body);
+					console.log(req.body._id)
+					for (var j=0; j<user.like_photos.length; j++) {
+						console.log(user.like_photos[j]);
+						if (user.like_photos[j] == req.body._id) {
+							console.log('remove');
+							user.like_photos[j] = user.like_photos[user.like_photos.length-1];
+							user.like_photos.pop();
+							j--;
+						}
+					}
+					Photo.update({ _id: req.body._id }, { $inc: { likes: -1 }}, function (err, results) {
+						user.save(function (err) {
+							res.end()
+						})
+					})
+				})
+			}
 		},
 
 		dislike: function (req, res) {

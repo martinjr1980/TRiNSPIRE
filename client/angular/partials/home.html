@@ -1,7 +1,7 @@
 <div ng-controller='MainController'>
 	<div id='header' class='row'>
 		<div class='left'>
-			<a href='#'><h1>TRiNSPIRE</h1></a>
+			<h1>TRiNSPIRE</h1>
 		</div>
 		<div class='right'>
 			<a href='' ng-click='toggleNav()' class='right'>
@@ -11,41 +11,52 @@
 			</a>
 		</div>
 	</div>
-	<div id='canvas'>
-		<div id='nav-bar'>
-			<ul>
-				<li id='login'>
-					<a ng-click='expand()' class='link' href=''>Login</a>
-						<div id='form' class='hide'>
-						<p><input type='text' ng-model='new_user.name'></p>
-						<p><button ng-click='login()' class='orange'>Enter</button></p>
-					</div>
-				</li>
-				<li><a class='link' href=''>All Photos</a></li>
-				<li>
-					<a class='marg-left' href='' ng-click='toggleNav()'>
-						<p class='bar'></p>
-						<p class='bar'></p>
-						<p class='bar'></p>
-					</a>
-				</li>
-				<li><a class='link' href=''></a></li>
-				<li><a class='link' href=''></a></li>
-				<li><a class='link' href=''></a></li>
-				<li><a class='link' href=''></a></li>
-				<li><a class='link' href=''></a></li>
-				<li><a class='link' href=''></a></li>
-				<li><a class='link' href=''></a></li>
-				<li><a class='link' href=''></a></li>
-				<li><a class='link' href=''></a></li>
-			</ul>
-		</div>
-		<div id='a0'>
-		</div>
-		<div id='content'>
-			<div class='block' ng-repeat="photo in all_photos | filter: filter_name | orderBy: 'created_at'">
-				<img class='thumb' src="{{ photo.url }}">
+	<div id='overlay'>
+	</div>
+	<div id='modal' class='close-modal'>
+		<div id='modal-banner'></div>
+		<a href='' ng-click='closeModal()' class="close">X</a>
+		<h2 class='modal-title'>{{ current_photo.title }}</h2>
+		<p class='modal-text'>{{ current_photo.city }}, {{ current_photo.country }}</p>
+		<p class='modal-text'>{{ current_photo.description }}</p>
+	</div>
+	<div id='nav-bar'>
+		<div id='nav-background'></div>
+		<ul>
+			<li></li>
+			<a ng-click='expand()' href=''>
+				<li id='login' class='link'>Login</li>
+			</a>
+			<div id='form' class='hide'>
+				<p class='marg-left'><input type='text' ng-model='new_user.name'></p>
+				<p class='marg-left marg-bot'><button ng-click='login()' class='orange'>Enter</button></p>
 			</div>
+			<a href='' ng-click='toggleNav()'>
+				<li class='link'>
+					<p class='bar'></p>
+					<p class='bar'></p>
+					<p class='bar'></p>
+				</li>
+			</a>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+	<div id='a0'>
+	</div>
+	<div id='content'>
+		<div class='block' ng-repeat="photo in all_photos | filter: filter_name | orderBy: '-created_at'">
+			<a href='' ng-click='openModal(photo)'>
+				<img class='thumb' src="{{ photo.url }}">
+			</a>
 		</div>
 	</div>
 </div>

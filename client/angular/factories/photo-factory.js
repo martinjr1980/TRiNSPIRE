@@ -26,5 +26,19 @@ travelApp.factory('PhotoFactory', function($http) {
 		})
 	}
 
+	factory.likePhoto = function (status, photo, user, callback) {
+		var info = { _id: photo._id, user_id: user._id, like_status: status }
+		$http.post('/photos/like', info).success(function (data) {
+			if (status === true) {
+				photo.likes++;
+			}
+			else {
+				photo.likes--;
+			}
+			photo.like_status = status;
+			callback(photo);
+		})
+	}
+
 	return factory;
 })

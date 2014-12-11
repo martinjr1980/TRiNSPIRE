@@ -11,48 +11,60 @@
 			</a>
 		</div>
 	</div>
-	<div id='canvas'>
-		<div id='nav-bar'>
-			<ul>
-				<li>
-					<p class='name'>Hi {{ current_user.name }}!</p>
-				</li>
-				<li><a class='link' href=''>All Photos</a></li>
-				<li><a ng-click='showUser(current_user._id)' class='link' href=''>My Photos</a></li>
-				<li id='add-photo'>
-					<a ng-click='expand2()' class='link' href=''>Add Photo</a>
-					<p class='success'>{{ message.success }}</p>
-					<div id='form' class='hide'>
-						<p><input type='text' class='long' ng-model='new_photo.title' placeholder='Title'></p>
-						<p><input type='text' class='long' ng-model='new_photo.url' placeholder='File Name'></p>
-						<p><input type='text' class='long' ng-model='new_photo.city' placeholder='City'></p>
-						<p><input type='text' class='long' ng-model='new_photo.country' placeholder='Country'></p>
-						<p><textarea class='long' ng-model='new_photo.description' placeholder='Description'></textarea></p>
-						<p><button ng-click='addPhoto(current_user._id)' class='green'>Enter</button></p>
-					</div>
-				</li>
-				<li><a ng-click='logout()' class='link' href='#'>Logout</a></li>
-				<li>
-					<a class='marg-left' href='' ng-click='toggleNav()'>
-						<p class='bar'></p>
-						<p class='bar'></p>
-						<p class='bar'></p>
-					</a>
-				</li>
-				<li><a class='link' href=''></a></li>
-				<li><a class='link' href=''></a></li>
-				<li><a class='link' href=''></a></li>
-				<li><a class='link' href=''></a></li>
-				<li><a class='link' href=''></a></li>
-				<li><a class='link' href=''></a></li>
-			</ul>
+	<div id='overlay'>
+	</div>
+	<div id='modal' class='close-modal'>
+		<div id='modal-banner'></div>
+		<div id='likes'>
+			<input id='like' type='checkbox' ng-model='current_photo.like_status' ng-change='like(current_photo.like_status)'><label for='like'><span></span></label><p>{{ current_photo.likes }}</p>
 		</div>
-		<div id='a0'>
-		</div>
-		<div id='my-content'>
-			<div class='block' ng-repeat="photo in my_photos | filter: filter_name | orderBy: 'created_at'">
-				<img class='thumb' src="{{ photo.url }}">
+		<a href='' ng-click='closeModal()' class="close">X</a>
+		<h2 class='modal-title'>{{ current_photo.title }}</h2>
+		<p class='modal-text'>{{ current_photo.city }}, {{ current_photo.country }}</p>
+		<p class='modal-text'>{{ current_photo.description }}</p>
+	</div>
+	<div id='nav-bar'>
+		<div id='nav-background'></div>
+		<ul>
+			<li></li>
+			<li>
+				<p class='name'>Hi {{ current_user.name }}!</p>
+			</li>
+			<a ng-click='allPhotos()' href=''><li class='link'>All Photos</li></a>
+			<a ng-click='myPhotos()' href=''><li class='link'>My Photos</li></a>
+			<a ng-click='expand2()' href=''>
+				<li id='add-photo' class='link'>Add Photo</li>
+			</a>
+			<p class='success marg-left'>{{ message.success }}</p>
+			<div id='form' class='hide'>
+				<p><input type='text' class='marg-left long' ng-model='new_photo.title' placeholder='Title'></p>
+				<p><input type='text' class='marg-left long' ng-model='new_photo.url' placeholder='File Name'></p>
+				<p><input type='text' class='marg-left long' ng-model='new_photo.city' placeholder='City'></p>
+				<p><input type='text' class='marg-left long' ng-model='new_photo.country' placeholder='Country'></p>
+				<p><textarea class='marg-left long' ng-model='new_photo.description' placeholder='Description'></textarea></p>
+				<p class='marg-left marg-bot'><button ng-click='addPhoto(current_user._id)' class='green'>Enter</button></p>
 			</div>
+			<a ng-click='logout()' href='#'><li class='link'>Logout</li></a>
+			<a href='' ng-click='toggleNav()'>
+				<li class='link'>
+					<p class='bar'></p>
+					<p class='bar'></p>
+					<p class='bar'></p>
+				</li>
+			</a>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+	<div id='a0'>
+	</div>
+	<div id='my-content'>
+		<div class='block' ng-repeat="photo in my_photos | filter: filter_name | orderBy: '-created_at'">
+			<a href='' ng-click='openModal(photo)'><img class='thumb' src="{{ photo.url }}"></a>
 		</div>
 	</div>
 </div>
