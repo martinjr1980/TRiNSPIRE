@@ -1,4 +1,7 @@
 travelApp.controller('MainController', function ($scope, $location, UserFactory, PhotoFactory) {
+	// $scope.my_photos = [];
+	// $scope.all_photos = [];
+	// $scope.current_photo = {};
 
 	function mainPhoto() {
 		var length = $scope.all_photos.length;
@@ -31,6 +34,40 @@ travelApp.controller('MainController', function ($scope, $location, UserFactory,
 		}		
 	}
 
+	function getCities(my_photos) {
+		var cities = [];
+		for (var i=0; i<my_photos.length; i++) {
+			cities.push(my_photos[i].city);
+		}
+		for (var i=0; i<cities.length-1; i++) {
+			for (var j=i+1; j< cities.length; j++) {
+				if (cities[i] === cities[j]) {
+					cities[j] = cities[cities.length-1];
+					cities.pop();
+					j--;
+				}
+			}
+		}
+		return cities;
+	}
+
+	function getCountries(my_photos) {
+		var countries = [];
+		for (var i=0; i<my_photos.length; i++) {
+			countries.push(my_photos[i].country);
+		}
+		for (var i=0; i<countries.length-1; i++) {
+			for (var j=i+1; j< countries.length; j++) {
+				if (countries[i] === countries[j]) {
+					countries[j] = countries[countries.length-1];
+					countries.pop();
+					j--;
+				}
+			}
+		}
+		return countries;
+	}
+
 	PhotoFactory.allPhotos(function (output) {
 		$scope.all_photos = output;
 		mainPhoto();
@@ -46,6 +83,10 @@ travelApp.controller('MainController', function ($scope, $location, UserFactory,
 		localStorage.show = 'my';
 		PhotoFactory.myPhotos(id, function (output) {
 			$scope.my_photos = output;
+			var cities = getCities($scope.my_photos);
+			var countries = getCountries($scope.my_photos);
+			$scope.all_cities = cities;
+			$scope.all_countries = countries;
 		})
 	}
 
@@ -57,12 +98,20 @@ travelApp.controller('MainController', function ($scope, $location, UserFactory,
 			if (localStorage.show && localStorage.show === 'all') {
 				PhotoFactory.allPhotos(function (output) {
 					$scope.my_photos = output;
+					var cities = getCities($scope.my_photos);
+					var countries = getCountries($scope.my_photos);
+					$scope.all_cities = cities;
+					$scope.all_countries = countries;
 				})
 			}
 			else {
 				console.log('my');
 				PhotoFactory.myPhotos(id, function (output) {
 					$scope.my_photos = output;
+					var cities = getCities($scope.my_photos);
+					var countries = getCountries($scope.my_photos);
+					$scope.all_cities = cities;
+					$scope.all_countries = countries;
 				})
 			}
 		}
@@ -157,8 +206,19 @@ travelApp.controller('MainController', function ($scope, $location, UserFactory,
 		}
 	}
 
+	$scope.expand3 = function() {
+		var show = document.getElementById('show-filter');
+		if (show.className === 'link tall') {
+			show.className = 'link';
+			document.getElementById('filter').className = 'hide';
+		}
+		else {
+			show.className = 'link tall';	
+			document.getElementById('filter').className = '';
+		}
+	}
+
 	$scope.openModal = function(photo) {
-		photo.like_status = false;
 		localStorage.current_photo = JSON.stringify(photo);
 		modal();
 	}
@@ -170,6 +230,64 @@ travelApp.controller('MainController', function ($scope, $location, UserFactory,
 		setTimeout(function() {
 			document.getElementById('modal').style.zIndex = -2000;
 		},500)
+	}
+
+	$scope.nextPic = function() {
+		for (var i=0; i<$scope.my_photos.length; i++) {
+			if ($scope.my_photos[i]._id === $scope.current_photo._id) {
+				console.log(i);
+				if (i === $scope.my_photos.length-1) {
+					localStorage.current_photo = JSON.stringify($scope.my_photos[0]);
+				}
+				else {
+					localStorage.current_photo = JSON.stringify($scope.my_photos[i+1]);
+				}
+			}
+		}
+		modal();
+	}
+
+	$scope.prevPic = function() {
+		for (var i=0; i<$scope.my_photos.length; i++) {
+			if ($scope.my_photos[i]._id === $scope.current_photo._id) {
+				if (i === 0) {
+					localStorage.current_photo = JSON.stringify($scope.my_photos[$scope.my_photos.length-1]);
+				}
+				else {
+					localStorage.current_photo = JSON.stringify($scope.my_photos[i-1]);
+				}
+			}
+		}
+		modal();
+	}
+
+	$scope.nextPicAll = function() {
+		for (var i=0; i<$scope.all_photos.length; i++) {
+			if ($scope.all_photos[i]._id === $scope.current_photo._id) {
+				console.log(i);
+				if (i === $scope.all_photos.length-1) {
+					localStorage.current_photo = JSON.stringify($scope.all_photos[0]);
+				}
+				else {
+					localStorage.current_photo = JSON.stringify($scope.all_photos[i+1]);
+				}
+			}
+		}
+		modal();
+	}
+
+	$scope.prevPicAll = function() {
+		for (var i=0; i<$scope.all_photos.length; i++) {
+			if ($scope.all_photos[i]._id === $scope.current_photo._id) {
+				if (i === 0) {
+					localStorage.current_photo = JSON.stringify($scope.all_photos[$scope.all_photos.length-1]);
+				}
+				else {
+					localStorage.current_photo = JSON.stringify($scope.all_photos[i-1]);
+				}
+			}
+		}
+		modal();
 	}
 
 })

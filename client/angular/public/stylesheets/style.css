@@ -116,9 +116,10 @@ li.link:hover {
 
 h1 {
 	font-size: 50px; font-weight: 800;
-	font-style: italic;
 	color: #19FFA3;
+	font-family: HURTMOLD;
 	z-index: 1;
+	margin-left: 5px;
 }
 
 li {
@@ -134,7 +135,7 @@ li {
 	padding-left: 15px;
 }
 
-#form {
+#form, #filter {
 	position: relative;
 }
 
@@ -178,7 +179,7 @@ p.like {
 	display: none;
 }
 
-input[type='text'] {
+input[type='text'], select {
 	height: 25px; width: 150px;
 	margin-top: 10px;
 	color: black;
@@ -188,7 +189,7 @@ input[type='text'] {
 	padding-left: 5px;
 }
 
-input[type='text'].long, textarea.long {
+input[type='text'].long, textarea.long, select.long {
 	width: 250px;
 }
 
@@ -316,6 +317,25 @@ button.right {
 }
 
 .close:hover { background: #00d9ff; }
+
+.left-arrow {
+	position: absolute;
+	height: 50px; width: 50px;
+	background-image: url('./../images/left_orange.png');
+	background-size: cover;
+	top: 45%; left: 0px;
+}
+
+.right-arrow {
+	position: absolute;
+	height: 50px; width: 50px;
+	background-image: url('./../images/right_orange.png');
+	background-size: cover;
+	top: 45%; right: 0px;
+}
+
+.left-arrow:hover { background-image: url('./../images/left_blue.png'); }
+.right-arrow:hover { background-image: url('./../images/right_blue.png'); }
 
 input[type='checkbox'] { display: none; }
 

@@ -1,1 +1,1 @@
-var travelApp = angular.module('travelApp', ['ngRoute']);
+var travelApp = angular.module('travelApp', ['ngRoute', 'ui.utils']);
