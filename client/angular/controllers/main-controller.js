@@ -1,13 +1,13 @@
 travelApp.controller('MainController', function ($scope, $location, UserFactory, PhotoFactory) {
-	// $scope.my_photos = [];
 	// $scope.all_photos = [];
+	// $scope.my_photos = [];
 	// $scope.current_photo = {};
 
+	// The main photo that is displayed is the one that has the most likes
 	function mainPhoto() {
-		var length = $scope.all_photos.length;
 		var likes = 0;
 		var main_photo = '';
-		for (var i=0; i<length; i++) {
+		for (var i=0; i<$scope.all_photos.length; i++) {
 			if ($scope.all_photos[i].likes > likes) {
 				likes = $scope.all_photos[i].likes;
 				main_photo = $scope.all_photos[i].url_large;
@@ -41,7 +41,7 @@ travelApp.controller('MainController', function ($scope, $location, UserFactory,
 		}
 		for (var i=0; i<cities.length-1; i++) {
 			for (var j=i+1; j< cities.length; j++) {
-				if (cities[i] === cities[j]) {
+				if (cities[i] == cities[j]) {
 					cities[j] = cities[cities.length-1];
 					cities.pop();
 					j--;
@@ -58,7 +58,7 @@ travelApp.controller('MainController', function ($scope, $location, UserFactory,
 		}
 		for (var i=0; i<countries.length-1; i++) {
 			for (var j=i+1; j< countries.length; j++) {
-				if (countries[i] === countries[j]) {
+				if (countries[i] == countries[j]) {
 					countries[j] = countries[countries.length-1];
 					countries.pop();
 					j--;
@@ -74,6 +74,31 @@ travelApp.controller('MainController', function ($scope, $location, UserFactory,
 		modal();
 	})
 
+	if (localStorage.session !== JSON.stringify({}) && localStorage.session) {
+		if (JSON.parse(localStorage.session).loggedIn === true) {
+			$scope.current_user = JSON.parse(localStorage.session).user;
+			var id = $scope.current_user._id;
+			if (localStorage.show && localStorage.show === 'all') {
+				PhotoFactory.allPhotos(function (output) {
+					$scope.my_photos = output;
+					var cities = getCities($scope.my_photos);
+					var countries = getCountries($scope.my_photos);
+					$scope.all_cities = cities;
+					$scope.all_countries = countries;
+				})
+			}
+			else {
+				PhotoFactory.myPhotos(id, function (output) {
+					$scope.my_photos = output;
+					var cities = getCities($scope.my_photos);
+					var countries = getCountries($scope.my_photos);
+					$scope.all_cities = cities;
+					$scope.all_countries = countries;
+				})
+			}
+		}
+	}
+
 	$scope.allPhotos = function() {
 		localStorage.show = 'all';
 		$scope.my_photos = $scope.all_photos;
@@ -88,33 +113,6 @@ travelApp.controller('MainController', function ($scope, $location, UserFactory,
 			$scope.all_cities = cities;
 			$scope.all_countries = countries;
 		})
-	}
-
-	if (localStorage.session !== JSON.stringify({}) && localStorage.session) {
-		if (JSON.parse(localStorage.session).loggedIn === true) {
-			console.log(JSON.parse(localStorage.session));
-			$scope.current_user = JSON.parse(localStorage.session).user;
-			var id = $scope.current_user._id;
-			if (localStorage.show && localStorage.show === 'all') {
-				PhotoFactory.allPhotos(function (output) {
-					$scope.my_photos = output;
-					var cities = getCities($scope.my_photos);
-					var countries = getCountries($scope.my_photos);
-					$scope.all_cities = cities;
-					$scope.all_countries = countries;
-				})
-			}
-			else {
-				console.log('my');
-				PhotoFactory.myPhotos(id, function (output) {
-					$scope.my_photos = output;
-					var cities = getCities($scope.my_photos);
-					var countries = getCountries($scope.my_photos);
-					$scope.all_cities = cities;
-					$scope.all_countries = countries;
-				})
-			}
-		}
 	}
 
 	$scope.login = function() {
@@ -143,7 +141,6 @@ travelApp.controller('MainController', function ($scope, $location, UserFactory,
 	}
 
 	$scope.like = function (status) {
-		console.log(status);
 		PhotoFactory.likePhoto(status, $scope.current_photo, $scope.current_user, function (output) {
 			localStorage.current_photo = JSON.stringify(output);
 			var session = {};
@@ -153,11 +150,8 @@ travelApp.controller('MainController', function ($scope, $location, UserFactory,
 				session.user.like_photos.push($scope.current_photo._id);
 			}
 			else {
-				console.log($scope.current_photo._id);
 				for (var i=0; i<session.user.like_photos.length; i++) {
-					console.log(session.user.like_photos[i]);
 					if (session.user.like_photos[i] === $scope.current_photo._id) {
-						console.log('remove');
 						session.user.like_photos[i] = session.user.like_photos[session.user.like_photos.length-1];
 						session.user.like_photos.pop();
 						i--;
@@ -166,10 +160,6 @@ travelApp.controller('MainController', function ($scope, $location, UserFactory,
 			}
 			localStorage.session = JSON.stringify(session);
 		})
-	}
-
-	$scope.dislike = function (photo_id, user_id) {
-		console.log('dislike');
 	}
 
 	$scope.toggleNav = function() {
@@ -183,38 +173,22 @@ travelApp.controller('MainController', function ($scope, $location, UserFactory,
 	}
 
 	$scope.expand = function() {
-		var login = document.getElementById('login');
-		if (login.className === 'link tall') {
-			login.className = 'link';
-			document.getElementById('form').className = 'hide';
+		var form = document.getElementById('form');
+		if (form.className === 'hide') {
+			form.className = '';
 		}
 		else {
-			login.className = 'link tall';	
-			document.getElementById('form').className = '';
+			form.className = 'hide';
 		}
 	}
 
 	$scope.expand2 = function() {
-		var add = document.getElementById('add-photo');
-		if (add.className === 'link tall2') {
-			add.className = 'link';
-			document.getElementById('form').className = 'hide';
+		var filter = document.getElementById('filter');
+		if (filter.className === 'hide') {
+			filter.className = '';
 		}
 		else {
-			add.className = 'link tall2';	
-			document.getElementById('form').className = '';
-		}
-	}
-
-	$scope.expand3 = function() {
-		var show = document.getElementById('show-filter');
-		if (show.className === 'link tall') {
-			show.className = 'link';
-			document.getElementById('filter').className = 'hide';
-		}
-		else {
-			show.className = 'link tall';	
-			document.getElementById('filter').className = '';
+			filter.className = 'hide';
 		}
 	}
 
@@ -229,13 +203,12 @@ travelApp.controller('MainController', function ($scope, $location, UserFactory,
 		document.getElementById('overlay').className = '';
 		setTimeout(function() {
 			document.getElementById('modal').style.zIndex = -2000;
-		},500)
+		}, 500)
 	}
 
 	$scope.nextPic = function() {
 		for (var i=0; i<$scope.my_photos.length; i++) {
 			if ($scope.my_photos[i]._id === $scope.current_photo._id) {
-				console.log(i);
 				if (i === $scope.my_photos.length-1) {
 					localStorage.current_photo = JSON.stringify($scope.my_photos[0]);
 				}

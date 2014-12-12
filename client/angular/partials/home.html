@@ -1,8 +1,7 @@
 <div ng-controller='MainController'>
+
 	<div id='header' class='row'>
-		<div class='left'>
-			<h1>TRiNSPIRE</h1>
-		</div>
+		<div class='left'><h1>TRiNSPIRE</h1></div>
 		<div class='right'>
 			<a href='' ng-click='toggleNav()' class='right'>
 				<p class='bar'></p>
@@ -11,8 +10,8 @@
 			</a>
 		</div>
 	</div>
-	<div id='overlay'>
-	</div>
+
+	<div id='overlay'></div>
 	<div id='modal' class='close-modal'>
 		<div id='modal-banner'></div>
 		<a href='' ng-click='closeModal()' class="close">X</a>
@@ -22,13 +21,12 @@
 		<a href='' ng-click='prevPicAll()' class='left-arrow'></a>
 		<a href='' ng-click='nextPicAll()' class='right-arrow'></a>
 	</div>
+
 	<div id='nav-bar'>
 		<div id='nav-background'></div>
 		<ul>
 			<li></li>
-			<a ng-click='expand()' href=''>
-				<li id='login' class='link'>Login</li>
-			</a>
+			<a ng-click='expand()' href=''><li id='login' class='link'>Login</li></a>
 			<div id='form' class='hide'>
 				<p class='marg-left'><input type='text' ng-model='new_user.name'></p>
 				<p class='marg-left marg-bot'><button ng-click='login()' class='orange'>Enter</button></p>
@@ -40,25 +38,16 @@
 					<p class='bar'></p>
 				</li>
 			</a>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
+			<li></li><li></li><li></li><li></li><li></li>
+			<li></li><li></li><li></li><li></li><li></li>
 		</ul>
 	</div>
-	<div id='a0'>
-	</div>
+
+	<div id='a0'></div>
+
 	<div id='content'>
 		<div class='block' ng-repeat="photo in all_photos | filter: filter_name | orderBy: '-created_at'">
-			<a href='' ng-click='openModal(photo)'>
-				<img class='thumb' src="{{ photo.url }}">
-			</a>
+			<a href='' ng-click='openModal(photo)'><img class='thumb' src="{{ photo.url }}"></a>
 		</div>
 	</div>
 </div>

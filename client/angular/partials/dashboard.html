@@ -1,8 +1,7 @@
 <div ng-controller='MainController'>
+
 	<div id='header' class='row'>
-		<div class='left'>
-			<a href='#/dashboard'><h1>TRiNSPIRE</h1></a>
-		</div>
+		<div class='left'><h1>TRiNSPIRE</h1></div>
 		<div class='right'>
 			<a href='' ng-click='toggleNav()' class='right'>
 				<p class='bar'></p>
@@ -11,12 +10,14 @@
 			</a>
 		</div>
 	</div>
-	<div id='overlay'>
-	</div>
+
+	<div id='overlay'></div>
 	<div id='modal' class='close-modal'>
 		<div id='modal-banner'></div>
 		<div id='likes'>
-			<input id='like' type='checkbox' ng-model='current_photo.like_status' ng-change='like(current_photo.like_status)'><label for='like'><span></span></label><p>{{ current_photo.likes }}</p>
+			<input id='like' type='checkbox' ng-model='current_photo.like_status' ng-change='like(current_photo.like_status)'>
+			<label for='like'><span></span></label>
+			<p>{{ current_photo.likes }}</p>
 		</div>
 		<a href='' ng-click='closeModal()' class="close">X</a>
 		<h2 class='modal-title'>{{ current_photo.title }}</h2>
@@ -25,16 +26,13 @@
 		<a href='' ng-click='prevPic()' class='left-arrow'></a>
 		<a href='' ng-click='nextPic()' class='right-arrow'></a>
 	</div>
+
 	<div id='nav-bar'>
 		<div id='nav-background'></div>
 		<ul>
 			<li></li>
-			<li>
-				<p class='name'>Hi {{ current_user.name }}!</p>
-			</li>
-			<a ng-click='expand2()' href=''>
-				<li id='add-photo' class='link'>Add Photo</li>
-			</a>
+			<li><p class='white'>Hi {{ current_user.name }}!</p></li>
+			<a ng-click='expand()' href=''><li id='add-photo' class='link'>Add Photo</li></a>
 			<p class='success marg-left'>{{ message.success }}</p>
 			<div id='form' class='hide'>
 				<input type='text' class='marg-left long' ng-model='new_photo.title' placeholder='Title'>
@@ -46,11 +44,15 @@
 			</div>
 			<a ng-click='allPhotos()' href=''><li class='link'>All Photos</li></a>
 			<a ng-click='myPhotos()' href=''><li class='link'>My Photos</li></a>
-			<a ng-click='expand3()' href=''><li id='show-filter' class='link'>Filters</li></a>
+			<a ng-click='expand2()' href=''><li id='show-filter' class='link'>Filters</li></a>
 			<div id='filter' class='hide'>
 				<input type='text' class='marg-left long' placeholder='Search...' ng-model='filter_name'>
-				<select ng-model='filter_name' class='marg-left long' ng-options="city for city in all_cities"><option style='display:none' value=''>Select a City</option></select>
-				<select ng-model='filter_name' class='marg-left marg-bot long' ng-options="country for country in all_countries"><option style='display:none' value=''>Select a Country</option></select>
+				<select ng-model='filter_name' class='marg-left long' ng-options="city for city in all_cities">
+					<option style='display:none' value=''>Select a City</option>
+				</select>
+				<select ng-model='filter_name' class='marg-left marg-bot long' ng-options="country for country in all_countries">
+					<option style='display:none' value=''>Select a Country</option>
+				</select>
 			</div>
 			<a ng-click='logout()' href='#'><li class='link'>Logout</li></a>
 			<a href='' ng-click='toggleNav()'>
@@ -60,16 +62,14 @@
 					<p class='bar'></p>
 				</li>
 			</a>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
+			<li></li><li></li><li></li><li></li><li></li>
 		</ul>
 	</div>
+
 	<div id='a0'>
 	</div>
-	<div id='my-content'>
+
+	<div id='content'>
 		<div class='block' ng-repeat="photo in my_photos | filter: filter_name | orderBy: '-created_at'">
 			<a href='' ng-click='openModal(photo)'><img class='thumb' src="{{ photo.url }}"></a>
 		</div>

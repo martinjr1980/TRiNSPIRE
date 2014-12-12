@@ -39,10 +39,6 @@ module.exports = function (app) {
 		photos.like(req, res);
 	})
 
-	app.post('/photos/dislike', function (req, res) {
-		photos.dislike(req, res);
-	})
-
 	app.post('/photos/delete', function (req, res) {
 		photos.delete(req, res);
 	})
