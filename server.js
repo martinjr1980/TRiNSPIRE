@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, 'client')));
 var mongoose = require('./config/mongoose.js');
 var routes = require('./config/routes.js')(app);
 
-app.set('port', 9000);
+app.set('port', 5000);
 app.listen(app.get('port'), function() {
     console.log('cool stuff on: ' + app.get('port'));
 });

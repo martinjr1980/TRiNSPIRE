@@ -1,0 +1,51 @@
+HTML
+- Divs (moving div and adding/removing border)
+- Hyperlink (can transport you somewhere)
+- Img - changing image source to move from one place to another?
+
+CSS
+- Hide/unhide
+- Advanced animation (maybe to end the game)
+
+
+JAVASCRIPT
+- var
+- if/else
+- arrays and objects
+- for loop
+- functions
+- classes
+- Callbacks (how to implement in a cool way?)
+
+Angular
+- controllers
+- factories
+
+NodeJS
+- Adding chat feature
+- Socket to have simultaneous players
+
+
+jQUERY
+- fadeIn/fadeOut
+- slideDown/slideUp
+- append
+
+Ajax/API
+
+
+STORYLINE
+Screen starts black
+You hear a voice
+Need to turn the light on
+Trapped in a DIV - Need to escape out of DIV
+Enter your name via form submission
+Now you can perform actions using this form submission.
+Eventually, you figure out that the world is not only one screen. You need to scroll down and more stuff is available
+Need to make a controller and a factory to talk to the back end
+Once you access the backend, you can make a call to the server for help
+Need to submit id/password to unlock the world.
+Ending -> Hello World!
+
+What is the goal? To escape from the world? To build a world? Matrix???
+Escape from prison and get back to the real world. 
