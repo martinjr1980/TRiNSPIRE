@@ -6,7 +6,7 @@ var connect = function() {
 	// Specify options for when mongoose connects to mongodb
 	var options = { server: { socketOptions: { keepAive: 1 } } };
 	// Connect to our mongodb database server with options specified above
-	mongoose.connect('mongodb://localhost/travelApp', options);
+	mongoose.connect('mongodb://heroku_app33224923:iu363ioiepil4m7ls8lmae5c39@ds031551.mongolab.com:31551/heroku_app33224923', options);
 }
 connect();
 
