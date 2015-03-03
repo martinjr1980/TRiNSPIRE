@@ -1,4 +1,7 @@
-* { margin: 0px; padding: 0px; font-size: 0px; font-family: Andale Mono, Verdana, Impact; }
+@font-face { font-family: 'AndaleMono'; src: url('Andale_Mono.ttf'); }
+@font-face { font-family: 'HURTMOLD'; src: url('HURTMOLD.otf'); }
+
+* { margin: 0px; padding: 0px; font-size: 0px; font-family: AndaleMono, Verdana, Impact; }
 
 
 #wrapper { height: auto; width: 100%; overflow: hidden; position: relative; }
